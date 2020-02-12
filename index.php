@@ -1,9 +1,8 @@
 <?php
-require __DIR__ .'/classes/GuestBook.php';
-require __DIR__ .'/classes/View.php';
-
-$guestBook = new GuestBook(__DIR__ .'/Data.txt');
-$records = $guestBook->getData();
+require __DIR__ . '/classes/DB.php';
+require __DIR__ . '/classes/View.php';
+$db = new DB();
+$dataFromDB = $db->query('SELECT * FROM news ORDER BY id DESC', []);
 $view = new View();
-$view->assign('records',$records);
-$view->display(__DIR__.'/templates/guest_book_template.php');
+$view->assign('dataFromDB', $dataFromDB);
+$view->display(__DIR__ . '/templates/indexTemplate.php');

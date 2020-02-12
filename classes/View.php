@@ -1,7 +1,10 @@
 <?php
-class View {
+
+class View
+{
     protected $data = [];
-    public function assign ($name, $value)
+
+    public function assign($name, $value)
     {
         $this->data[$name] = $value;
     }
@@ -10,7 +13,6 @@ class View {
     {
         foreach ($this->data as $name => $value) {
             $$name = $value;
-            var_dump($value);
         }
         require $template;
     }
