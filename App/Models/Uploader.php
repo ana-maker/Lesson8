@@ -25,6 +25,7 @@ class Uploader
                 __DIR__ . '/../../images/' . $_FILES[$this->fieldname]['name'] . ''
             );
         }
+        return false;
     }
 
 }
