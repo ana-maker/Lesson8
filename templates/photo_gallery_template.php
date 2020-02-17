@@ -10,8 +10,8 @@
 <body>
 <h1>Photo gallery</h1>
 <?php
-foreach ($dir as $key => $value) {
-    echo '<img src="/images/' . $value . '">';
+foreach ($dir as $image) {
+    echo '<img src="/images/' . $image . '">';
 }
 ?>
 </body>
