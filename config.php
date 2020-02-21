@@ -1,2 +1,10 @@
 <?php
-return ['dsn' => 'mysql:host=localhost;dbname=tester', 'username' => 'root', 'passwd' => ''];
+return [
+    'db' => [
+        'host' => 'localhost',
+        'dbname' => 'tester',
+        'user' => 'root',
+        'password' => ''
+
+    ]
+];
