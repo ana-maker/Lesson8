@@ -9,4 +9,5 @@ class Article extends Model
     public const TABLE = 'news';
     public $title;
     public $content;
+
 }

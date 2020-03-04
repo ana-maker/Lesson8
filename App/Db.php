@@ -1,23 +1,28 @@
 <?php
 
+
 namespace App;
-class Db
+class Db extends Config
 {
     protected $dbh;
 
     public function __construct()
     {
-        $config = (include __DIR__ . '/../config.php')['db'];
-        $this->dbh = new \PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'], $config['user'], $config['password']);
+        $config = Config::getObject();
+        $data = $config->data;
+        $this->dbh = new \PDO('mysql:host=' . $data['db']['host'] . ';dbname=' . $data['db']['dbname'],
+            $data['db']['user'], $data['db']['password']);
     }
 
-    public function query($sql, $class)
+    public function query(string $sql, $class, array $params = [])
     {
-        return $this->dbh->query($sql)->fetchAll(\PDO::FETCH_CLASS, $class);
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute($params);
+        return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
 
     }
 
-    public function execute(string $query,array $params =[])
+    public function execute(string $query, array $params = [])
     {
         $request = $this->dbh->prepare($query)->execute($params);
         if ($request) {
@@ -26,6 +31,9 @@ class Db
         return false;
     }
 
+    public function getLastId()
+    {
+        return $this->dbh->lastInsertId();
+    }
+
 }
-
-

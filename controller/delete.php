@@ -1,11 +1,10 @@
 <?php
 require __DIR__ . '/../autoload.php';
 
-use App\Models\DataBase;
+use App\Models\Article;
 
-$dataBase = new DataBase();
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $dataBase->query('DELETE FROM guestbook WHERE id=:id', [':id' => $_GET['id']]);
+    $article = new Article();
+    $article->id = $_GET['id'];
+    $article->delete();
 }
-header('Location: /controller/adminPanel.php');
